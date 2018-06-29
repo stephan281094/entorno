@@ -39,7 +39,7 @@ const renderProject = ({ project }) =>
 const view = state =>
   h('div', { class: 'app' }, [
     h('header', { class: 'header' }, [
-      h('a', { class: 'header__link', href: '/' }, 'Envs'),
+      h('a', { class: 'header__link', href: '/' }, 'Entorno'),
       h('input', {
         'aria-label': 'Search environments',
         class: 'header__search',

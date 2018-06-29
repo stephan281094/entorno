@@ -1,4 +1,4 @@
-# Envs
+# Entorno
 
 Get an overview of all your environments across different projects.
 

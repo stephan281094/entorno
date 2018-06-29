@@ -22,9 +22,9 @@
       }
     ]
   },
-  "envs": {
-    "name": "Envs",
-    "slug": "envs",
+  "entorno": {
+    "name": "Entorno",
+    "slug": "entorno",
     "description":
       "Get an overview of all your environments across different projects",
     "environments": [
@@ -42,7 +42,10 @@
         "name": "Info",
         "slug": "info",
         "urls": [
-          { "href": "https://github.com:stephan281094/envs", "name": "Github" }
+          {
+            "href": "https://github.com:stephan281094/entorno",
+            "name": "Github"
+          }
         ]
       }
     ]
