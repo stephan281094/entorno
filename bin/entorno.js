@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 const { promisify } = require('util')
 const fs = require('fs')
+const path = require('path')
 const webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
 const webpackBaseConfig = require('../webpack.config.js')
 
 // Turn fs.readFile into a promise.
 const readFile = promisify(fs.readFile)
+const cwd = path.resolve('.')
 
 // Get Webpack compiler.
 const getCompiler = async mode => {
@@ -14,6 +16,9 @@ const getCompiler = async mode => {
   const webpackConfig = {
     ...webpackBaseConfig,
     mode,
+    output: {
+      path: path.resolve(cwd, 'dist')
+    },
     plugins: [
       ...webpackBaseConfig.plugins,
       new webpack.DefinePlugin({ projectsRegistry })
@@ -29,7 +34,7 @@ const commands = {
     process.stdout.write('Building entorno... ')
     const compiler = await getCompiler('production')
 
-    compiler.run(err => {
+    compiler.run((err, stats) => {
       if (err) throw err
 
       process.stdout.write('done\n')
