@@ -3,12 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   module: {
-    rules: [
-      {
-        test: /\.js$/,
-        use: ['babel-loader']
-      }
-    ]
+    rules: [{ test: /\.js$/, use: ['babel-loader'] }]
   },
 
   devServer: {
@@ -17,10 +12,7 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      minify: {
-        collapseWhitespace: true,
-        minifyCSS: true
-      },
+      minify: { collapseWhitespace: true, minifyCSS: true },
       template: 'src/index.template.html'
     })
   ]

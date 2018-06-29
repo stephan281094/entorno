@@ -1,6 +1,5 @@
 import { h, render } from 'superfine'
 import Fuse from 'fuse.js'
-import projectsRegistry from '../projects.json'
 
 const initialState = {
   projects: Object.values(projectsRegistry)
