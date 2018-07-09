@@ -1,4 +1,4 @@
-import { h, render } from 'superfine'
+import { h, app } from 'hyperapp'
 import Fuse from 'fuse.js'
 
 const initialState = {
@@ -8,6 +8,14 @@ const initialState = {
 const fuse = new Fuse(initialState.projects, {
   keys: ['name', 'description', 'environments.slug', 'environments.name']
 })
+
+const actions = {
+  search(criteria) {
+    return state => ({
+      projects: criteria ? fuse.search(criteria) : initialState.projects
+    })
+  }
+}
 
 const renderProject = ({ project }) =>
   h('div', { key: project.slug }, [
@@ -35,19 +43,14 @@ const renderProject = ({ project }) =>
     )
   ])
 
-const view = state =>
+const view = (state, { search }) =>
   h('div', { class: 'app' }, [
     h('header', { class: 'header' }, [
       h('a', { class: 'header__link', href: '/' }, 'Entorno'),
       h('input', {
         'aria-label': 'Search environments',
         class: 'header__search',
-        oninput: event => {
-          const { value } = event.target
-          return value
-            ? app({ projects: fuse.search(value) })
-            : app(initialState)
-        },
+        oninput: event => search(event.target.value),
         placeholder: 'Search..',
         type: 'search'
       })
@@ -61,8 +64,4 @@ const view = state =>
     ])
   ])
 
-const app = (lastNode => state => {
-  lastNode = render(lastNode, view(state), document.body)
-})()
-
-app(initialState)
+app(initialState, actions, view, document.body)
