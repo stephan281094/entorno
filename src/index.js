@@ -17,51 +17,51 @@ const actions = {
   }
 }
 
-const renderProject = ({ project }) =>
-  h('div', { key: project.slug }, [
-    h('h2', { id: project.slug }, [
-      h('a', { href: `#${project.slug}` }, project.name)
-    ]),
-    h('p', null, project.description),
-    project.environments.map(env =>
-      h('details', { key: env.name }, [
-        h('summary', null, env.name),
-        h(
-          'ul',
-          null,
-          env.urls.map(url =>
-            h('li', { key: url.href }, [
-              h(
-                'a',
-                { href: url.href, rel: 'noopener', target: '_blank' },
-                url.name
-              )
-            ])
-          )
-        )
-      ])
-    )
-  ])
+const Project = ({ project }) => (
+  <div>
+    <h2 id={project.slug}>
+      <a href={`#${project.slug}`}>{project.name}</a>
+    </h2>
+    <p>{project.description}</p>
+    {project.environments.map(env => (
+      <details key={env.name}>
+        <summary>{env.name}</summary>
+        <ul>
+          {env.urls.map(url => (
+            <li key={url.href}>
+              <a href={url.href} rel="noopener" target="_blank">
+                {url.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </details>
+    ))}
+  </div>
+)
 
-const view = (state, { search }) =>
-  h('div', { class: 'app' }, [
-    h('header', { class: 'header' }, [
-      h('a', { class: 'header__link', href: '/' }, 'Entorno'),
-      h('input', {
-        'aria-label': 'Search environments',
-        class: 'header__search',
-        oninput: event => search(event.target.value),
-        placeholder: 'Search..',
-        type: 'search'
-      })
-    ]),
-    h('main', null, [
-      h(
-        'div',
-        { class: 'content' },
-        state.projects.map(project => renderProject({ project }))
-      )
-    ])
-  ])
+const view = (state, { search }) => (
+  <div class="app">
+    <header class="header">
+      <a class="header__link" href="/">
+        Entorno
+      </a>
+      <input
+        class="header__search"
+        type="search"
+        aria-label="Search environments"
+        placeholder="Search.."
+        oninput={event => search(event.target.value)}
+      />
+    </header>
+    <main>
+      <div class="content">
+        {state.projects.map(project => (
+          <Project key={project.slug} project={project} />
+        ))}
+      </div>
+    </main>
+  </div>
+)
 
 app(initialState, actions, view, document.body)
