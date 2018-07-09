@@ -1,18 +1,18 @@
 import { h, app } from 'hyperapp'
-import Fuse from 'fuse.js'
+import Search from './search'
 
 const initialState = {
   projects: Object.values(projectsRegistry)
 }
 
-const fuse = new Fuse(initialState.projects, {
+const projectsList = new Search(initialState.projects, {
   keys: ['name', 'description', 'environments.slug', 'environments.name']
 })
 
 const actions = {
   search(criteria) {
-    return state => ({
-      projects: criteria ? fuse.search(criteria) : initialState.projects
+    return () => ({
+      projects: criteria ? projectsList.search(criteria) : initialState.projects
     })
   }
 }
