@@ -1,6 +1,6 @@
 {
   "name": "entorno",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -10,6 +10,12 @@
   "bin": {
     "entorno": "./bin/entorno.js"
   },
+  "files": [
+    "src/*",
+    "bin/*",
+    ".babelrc",
+    "webpack.config.js"
+  ],
   "dependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",

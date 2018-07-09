@@ -2,4 +2,4 @@
 
 Get an overview of all your environments across different projects.
 
-![Screenshot](media/screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/stephan281094/entorno/master/media/screenshot.png)
