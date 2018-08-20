@@ -2,6 +2,7 @@
 const { promisify } = require('util')
 const fs = require('fs')
 const path = require('path')
+const yaml = require('js-yaml')
 const webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
 const webpackBaseConfig = require('../webpack.config.js')
@@ -12,7 +13,9 @@ const cwd = path.resolve('.')
 
 // Get Webpack compiler.
 const getCompiler = async mode => {
-  const projectsRegistry = await readFile('entorno.json', 'utf-8')
+  const entornoFile = await readFile('entorno.yml', 'utf-8')
+  const { projects } = yaml.safeLoad(entornoFile)
+
   const webpackConfig = {
     ...webpackBaseConfig,
     mode,
@@ -21,7 +24,7 @@ const getCompiler = async mode => {
     },
     plugins: [
       ...webpackBaseConfig.plugins,
-      new webpack.DefinePlugin({ projectsRegistry })
+      new webpack.DefinePlugin({ projects: JSON.stringify(projects) })
     ]
   }
 

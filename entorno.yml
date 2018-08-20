@@ -1,0 +1,33 @@
+projects:
+  acme:
+    name: 'ACME'
+    slug: 'acme'
+    description: 'ACME description where you can describe the project.'
+    environments:
+      -
+        name: 'Production'
+        slug: 'production'
+        urls:
+          - { name: 'Main website', href: 'https://example.com' }
+          - { name: 'CMS', href: 'https://cms.example.com' }
+      -
+        name: 'Acceptance'
+        slug: 'acceptance'
+        urls:
+          - {name: 'Main website', href: 'https://acc.example.com' }
+          - {name: 'CMS', href: 'https://cms.acc.example.com' }
+  entorno:
+    name: 'Entorno'
+    slug: 'entorno'
+    description: 'Get an overview of all your environments across different projects'
+    environments:
+      -
+        name: 'Acceptance'
+        slug: 'acceptance'
+        urls:
+          - { name: 'Main website', href: 'https://example.com' }
+      -
+        name: 'Info'
+        slug: 'info'
+        urls:
+          - { name: 'Github', href: 'https://github.com/stephan281094/entorno' }

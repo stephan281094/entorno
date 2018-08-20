@@ -2,7 +2,7 @@ import { h } from 'hyperapp'
 import Search from './search'
 
 export const initialState = {
-  projects: Object.values(projectsRegistry)
+  projects: Object.values(projects)
 }
 
 const projectsList = new Search(initialState.projects, {
